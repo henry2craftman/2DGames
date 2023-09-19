@@ -14,7 +14,7 @@ public class Collision : MonoBehaviour
     {
         //Debug.Log("이크~");
     }
-
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Pizza" && !hasPizza)
@@ -30,10 +30,13 @@ public class Collision : MonoBehaviour
             print("배달이 완료되었습니다!");
             hasPizza = false;
             spriteRenderer.color = noPizzaColor;
+            collision.gameObject.SetActive(false);
 
+            GameManager.Instance.Score++;
             GameManager.Instance.CheckNextStage();
-            GameManager.Instance.score++;
         }
+
+        //FollowCamera.plan
     }
 
 }

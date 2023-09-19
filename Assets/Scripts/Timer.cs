@@ -21,6 +21,7 @@ public class Timer : MonoBehaviour
         if(nowSeconsToFinish < 0)
         {
             Debug.Log("Game Over");
+            
             isUpdated = true;
             GameManager.Instance.CheckEndGame();
             totalTime = 0;

@@ -29,6 +29,11 @@ public class DeliveryMan : MonoBehaviour
 
         steerAmount = (moveAmount == 0) ? 0 : (moveAmount >= 0  ? -steerAmount : steerAmount);
 
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            moveAmount *= boostAmount;
+        }
+
         transform.Rotate(0, 0, steerAmount);
         transform.Translate(0, moveAmount, 0);
     }
