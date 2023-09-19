@@ -30,6 +30,9 @@ public class Collision : MonoBehaviour
             print("배달이 완료되었습니다!");
             hasPizza = false;
             spriteRenderer.color = noPizzaColor;
+
+            GameManager.Instance.CheckNextStage();
+            GameManager.Instance.score++;
         }
     }
 
