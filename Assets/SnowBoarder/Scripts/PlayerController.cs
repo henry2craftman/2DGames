@@ -14,8 +14,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] ParticleSystem boostParticle;
     [SerializeField] ParticleSystem jumpParticle;
     private bool canMove = true;
-    AudioSource audioSource;
-    [SerializeField] List<AudioClip> audioClips = new List<AudioClip>();
 
 
     // Start is called before the first frame update
