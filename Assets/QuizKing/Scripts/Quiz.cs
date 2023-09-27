@@ -30,6 +30,9 @@ public class Quiz : MonoBehaviour
     [SerializeField] Slider progressBar;
     public bool isComplete;
 
+    AudioSource audioSource;
+    [SerializeField] List<AudioClip> audioClips;
+
     void Start()
     {
         timer = FindObjectOfType<QuizTimer>();
@@ -37,6 +40,8 @@ public class Quiz : MonoBehaviour
 
         progressBar.maxValue = questions.Count;
         progressBar.value = 0;
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -77,6 +82,8 @@ public class Quiz : MonoBehaviour
             buttonImage = answerButtons[index].GetComponent<Image>();
             buttonImage.sprite = answerSprite;
             scoreManager.IncrementCorrectAnswer();
+
+            audioSource.clip = audioClips[0];
         }
         else
         {
@@ -84,11 +91,14 @@ public class Quiz : MonoBehaviour
             correctAnswerIndex = currentQuestion.GetCorrectAnswerIndex();
             buttonImage = answerButtons[correctAnswerIndex].GetComponent<Image>();
             buttonImage.sprite = answerSprite;
+
+            audioSource.clip = audioClips[1];
         }
 
         SetButtonState(false);
         timer.ResetTimer();
         scoreText.text = "Score: " + scoreManager.CalculateScore() + "%";
+        audioSource.Play();
     }
 
     void SetButtonState(bool state)
