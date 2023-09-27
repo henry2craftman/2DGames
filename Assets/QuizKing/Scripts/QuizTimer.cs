@@ -7,7 +7,7 @@ public class QuizTimer : MonoBehaviour
     [SerializeField] float finishTime = 15;
     [SerializeField] float checkingTime = 5;
     float timerValue;
-    [SerializeField] bool isAnswering;
+    public bool isAnswering;
     public float fillAmount;
     public bool isNextQuestion;
 
