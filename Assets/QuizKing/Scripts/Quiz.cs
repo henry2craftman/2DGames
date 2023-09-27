@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using EasyTransition;
 
 public class Quiz : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class Quiz : MonoBehaviour
     [Header("Answers")]
     [SerializeField] GameObject[] answerButtons;
     private int correctAnswerIndex;
+    bool hasAnsweredEarly = true;
 
     [Header("Button Colors")]
     [SerializeField] Sprite defaultSprite;
@@ -30,8 +32,10 @@ public class Quiz : MonoBehaviour
     [SerializeField] Slider progressBar;
     public bool isComplete;
 
+    [Header("Audio")]
     AudioSource audioSource;
     [SerializeField] List<AudioClip> audioClips;
+
 
     void Start()
     {
@@ -56,8 +60,14 @@ public class Quiz : MonoBehaviour
                 return;
             }
 
+            hasAnsweredEarly = false;
             timer.isNextQuestion = false;
             GetNextQuestion();
+        }
+        else if(!hasAnsweredEarly && !timer.isAnswering)
+        {
+            DisplayAnswer(-1);
+            SetButtonState(false);
         }
     }
 
@@ -73,6 +83,16 @@ public class Quiz : MonoBehaviour
     }
 
     public void OnAnswerClickedEvent(int index)
+    {
+        hasAnsweredEarly = true;
+        DisplayAnswer(index);
+        SetButtonState(false);
+        timer.ResetTimer();
+        scoreText.text = "Score: " + scoreManager.CalculateScore() + "%";
+        audioSource.Play();
+    }
+
+    private void DisplayAnswer(int index)
     {
         Image buttonImage;
 
@@ -94,11 +114,6 @@ public class Quiz : MonoBehaviour
 
             audioSource.clip = audioClips[1];
         }
-
-        SetButtonState(false);
-        timer.ResetTimer();
-        scoreText.text = "Score: " + scoreManager.CalculateScore() + "%";
-        audioSource.Play();
     }
 
     void SetButtonState(bool state)

@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/SnowBoarder/Scenes/SnowBoarder.unity
     guid: 9543f14a51f836f4cb784a67c16ac26f
+  - enabled: 1
+    path: Assets/EasyTransitions/Demo/TransitionDemo.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects: {}

@@ -1,3 +1,4 @@
+using EasyTransition;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,9 @@ public class QuizTimer : MonoBehaviour
     public float fillAmount;
     public bool isNextQuestion;
 
+    [Header("Transition")]
+    public TransitionSettings transition;
+    public float trainsitionDelay;
     void Update()
     {
         timerValue -= Time.deltaTime;
@@ -25,6 +29,8 @@ public class QuizTimer : MonoBehaviour
             {
                 isAnswering = false;
                 timerValue = checkingTime;
+
+                TransitionManager.Instance().Transition(transition, trainsitionDelay);
             }
         }
         else
